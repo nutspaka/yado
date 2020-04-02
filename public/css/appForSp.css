@@ -1,0 +1,45 @@
+@media screen and (max-width:1000px){
+  /*画面幅が780pxまで*/
+
+  p{
+    font-size: 1rem;
+  }
+
+  #menu{
+    width:100vw;
+    height:fit-content;
+    float: left;
+    background-color: #5EFCE8;
+    color:#736EFE;
+    font-weight: bolder;
+    text-align: center;
+  }
+
+  #picky_detail{
+    text-align: center;
+   }
+
+   .result_script{
+    width:90vw;
+    padding: 0 5vw 0 5vw;
+   }
+
+   .humberger{
+     display: none;
+   }
+
+   .rebtnSp{
+    display: inline-block;
+  }
+
+}
+
+@media screen and (max-width:768px){
+  .cat1{
+    max-width: 18vw;
+  }
+  
+  .cat2{
+    max-width: 18vw;
+  } 
+}
