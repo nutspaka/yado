@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>監視登録リスト</h2>
-<small><i class="fas fa-user-secret"></i>･･･監視中&nbsp;&nbsp;<i class="fas fa-check"></i>･･･終了&nbsp;&nbsp;<i class="fas fa-paper-plane"></i>･･･通知済</small>
+<h2>キャンセル待ち登録リスト</h2>
+<small><i class="fas fa-user-secret"></i>･･･キャンセル待ち中&nbsp;&nbsp;<i class="fas fa-check"></i>･･･終了&nbsp;&nbsp;<i class="fas fa-paper-plane"></i>･･･通知済</small>
 @if (session('regist_error'))
   <div class="alert alert-success" role="alert">{{ session('regist_error') }}
   </div>
 @endif
-<p>監視対象は５件まで登録可能です。<br>
-<small>※宿泊日時を越えた監視対象は自動で「終了」となります。</small></p>
+<p>キャンセル待ち対象は５件まで登録可能です。<br>
+<small>※宿泊日時を越えたキャンセル待ち対象は自動で「終了」となります。</small></p>
   @if(count($watchlist)==0)
   <br>
     <h2>対象はありません</h2>
@@ -22,7 +22,7 @@
             <th></th>
           </tr>
           @foreach ($watchlist as $i)
-          {{-- 監視中 --}}
+          {{-- キャンセル待ち中 --}}
                  @if ($i->deleted_at == null && $i->expired == null)
                   <tr class="monitor">
                     <td><i class="fas fa-user-secret"></i></td>

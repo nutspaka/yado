@@ -25,6 +25,7 @@
     <br>
     <label>お問い合わせ内容</label>
     <br>
+    <br>
     <p class="black">{!! nl2br(e($inputs['body'])) !!}</p>
     <input
         class="unset"
@@ -34,13 +35,18 @@
     <br>
     <br>
     <div>
-    <a class="home_btn" href="{{ route('contact.index') }}">
-        < 入力修正
-    </a>
     &nbsp;
-    <button type="submit" class="btn btn-primary">
-        送信する >
+    <p class="policy_explanation">
+      <a class="policyhref" target="_blank" href="{{ route('terms') }}">利用規約</a>と<a class="policyhref" target="_blank" href="{{ route('policy') }}">プライバシーポリシー</a>に同意の上
+    </p>
+    <button type="submit" class="btn submit">
+        送信する
     </button>
+    <br>
+    <br>
+    <small>
+    <a href="{{ route('contact.index') }}">< 修正する</a>
+    </small>
   </div>
 </form>
 @endsection

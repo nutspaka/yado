@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->command('app:check-expired')->daily();
         // ->cron('1 * * * *');
-        $schedule->command('app:check-monitored')->everyFiveMinutes();
+        $schedule->command('app:check-monitored')->everyMinute();
     }
 
     /**

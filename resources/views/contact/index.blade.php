@@ -2,6 +2,7 @@
  
 @section('content')
 <div class="card-header">{{ __('お問い合わせ') }}</div>
+<br>
 <form method="POST" action="{{ route('contact.confirm') }}">
     @csrf
     <input
@@ -22,14 +23,14 @@
         <p class="error-message alert">{{ $errors->first('title') }}</p>
     @endif
     <br>
-    <textarea placeholder="お問い合わせ内容" name="body" required>{{ old('body') }}</textarea>
+    <textarea class="query" placeholder="お問い合わせ内容" name="body" required>{{ old('body') }}</textarea>
     @if ($errors->has('body'))
         <p class="error-message alert">{{ $errors->first('body') }}</p>
     @endif
 <br>
 <br>
     <div>
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn submit">
         入力内容確認
       </button>
     </div>

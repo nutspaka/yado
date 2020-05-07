@@ -44,9 +44,18 @@ class OrderShipped extends Mailable
         // return $this->from('example@example.com')
         // ->view('emails.orders.shipped');
 
-        if($this->xml == 0){
+        if($this->xml == 2){
             return $this->view('emails.expired')
-            ->subject('監視期限切れのお知らせ')
+            ->subject('宿泊日超過のお知らせ')
+            ->with([
+                'conditions' => $this->conditions,
+                'h_name' => $this->h_name
+            ]);
+        }
+
+        if($this->xml == 1){
+            return $this->view('emails.accepted')
+            ->subject('受付完了のお知らせ')
             ->with([
                 'conditions' => $this->conditions,
                 'h_name' => $this->h_name

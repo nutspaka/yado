@@ -6,32 +6,49 @@ html,body {
   headings-line-height:1.5;
   line-height-base: 1.65;
   letter-spacing: .1em;
-  background-color:#5EFCE8 ;
+  background-image: -moz-linear-gradient(left, rgb(255, 255, 255) 0%, #ff5959 100%);
+  background-image: -webkit-linear-gradient(left, #ffbe44 0%, #ff5959 100%);
+  background-image: linear-gradient(to right, #ffbe44 0%, #ff5959 100%);
+}
+
+small{
+  font-weight: lighter;
 }
 
 .logoimg{
-  width:320px;
+  width:240px;
+  margin-top: 40px;
+}
+
+.policylink{
+  color: #666;
+  text-decoration: underline;
+}
+
+.query{
+  min-height: 250px;
 }
 
 a {
   text-decoration: none;
-  color: #736EFE;
+  color: #fff;
 }
 
 p{
   text-align: left;
+  font-size: 16px;
   margin: 10px 5vw;
   word-break:break-all;
   font-weight:lighter;
 }
 
 #app{
+  display: grid;
   min-height: 90vh;
-  margin: auto;
   text-align: center;
   font-weight: bolder;
   font-size: 20px;
-  color: #736EFE;
+  color: #fff;
 }
 
 .btn {
@@ -39,27 +56,14 @@ p{
   padding: 10px 25px;
   margin: 10px 0 30px 0;
   border: none;
-  border-radius: 50px;
-  background-color:#736EFE;;
+  border-radius: 15px;
+  background-color:#fff;;
   color: #fff;
-}
-.btn:hover {
-  background-color:#fff;
-  color: #736EFE;
 }
 
 .home_btn {
   width: fit-content;
-  padding: 15px 25px;
-  font-size: 18px;
   margin: auto;
-  border-radius: 50px;
-  background-color:#fff;
-  color: #736EFE ;
-}
-.home_btn:hover {
-  background-color:#736EFE ;
-  color: #fff;
 }
 
 input,textarea{
@@ -75,6 +79,7 @@ input,textarea{
 }
 .black{
  color: black;
+ padding: 0vw 10vw;
 }
 
 .form-check-input{
@@ -107,7 +112,7 @@ table .monitor{
 }
 
 table tr:hover{
-  background-color: #736EFE;
+  background-color: #fff;
   color: #fff;
 }
 
@@ -118,27 +123,50 @@ table input{
   border-radius: 10px;
   text-align: center;
   font-size: 16px;
-  color: #736EFE;
+  color: #fff;
   border: none;
   cursor: pointer;
 }
 
 .head_tr{
-  background-color: #736EFE;
+  background-color: #fff;
   color: #fff;
-}
-
-footer{
-  width: 100%;
-  background-color:rgb(56, 55, 55);
-  font-size: 12px;
-  font-weight: lighter;
-  color: #fff;
-  text-align: center;
-  padding: 5px;
-  margin-top: 30px;
 }
 
 .alert{
   color: red;
+}
+
+.policy_wrap{
+  margin: 10px;
+}
+
+.policy{
+  text-align: left;
+	border:1px solid #ccc;
+  max-width: 500px;
+	padding:10px;
+  line-height:1.5;
+  font-size: 12px;
+  font-weight: lighter;
+	color:#666;
+  overflow-y:auto;
+  margin: auto;
+  background-color:#fff;
+}
+
+.policy_explanation{
+  text-align: center;
+  font-size: 14px;
+}
+.policyhref{
+  text-decoration:underline;
+}
+
+.submit{
+  background-color: #ffbe44;
+  color: #fff;
+  border: solid 1px #fff;
+  width: fit-content;
+  margin: 10px auto;
 }

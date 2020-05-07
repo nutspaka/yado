@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <div> 通知先の新規登録  </div>
+                    <div>通知先の新規登録</div>
                     <br>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -52,15 +52,19 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <br>
+                        <p class="policy_explanation">
+                            <a class="policyhref" target="_blank" href="{{ route('terms') }}">利用規約</a>と<a class="policyhref" target="_blank" href="{{ route('policy') }}">プライバシーポリシー</a>に同意の上
+                        </p>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('登録') }}
+                                    <i class="far fa-envelope"></i>&nbsp;{{ __('登録する(無料)') }}
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <br>
+                    <br>
                     @if (Route::has('login'))
                     <a class="btn-link" href="{{ route('login') }}">
                         <small>{{ __('すでに登録済みの方はこちら >') }}</small>

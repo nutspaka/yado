@@ -15,7 +15,8 @@ class CreateWatchlistsTable extends Migration
     {
         Schema::create('watchlists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
+            $table->string('email');
             $table->integer('expired')->nullable();
             $table->string('h_name',256);
             $table->string('h_id',256);

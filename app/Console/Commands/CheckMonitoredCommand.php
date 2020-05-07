@@ -23,7 +23,7 @@ class CheckMonitoredCommand extends Command
      *
      * @var string
      */
-    protected $description = '監視対象をチェック';
+    protected $description = 'キャンセル待ち対象をチェック';
 
     /**
      * Create a new command instance.
@@ -47,8 +47,8 @@ class CheckMonitoredCommand extends Command
         logger("Cron action: Check Monitored List");
 
         $results = DB::table('watchlists')
-        ->join('users', 'watchlists.user_id', '=', 'users.id')
-        ->select('watchlists.h_name','watchlists.id','watchlists.h_id','users.email','watchlists.conditions')
+        // ->join('users', 'watchlists.user_id', '=', 'users.id')
+        ->select('h_name','id','h_id','email','conditions')
         ->where([
             ['deleted_at', '=',null],
             ['expired', '=',null],])
@@ -84,7 +84,6 @@ class CheckMonitoredCommand extends Command
             if($xml->NumberOfResults > 0){
                 
                 Mail::to($i->email)
-                // ->bcc('shogouchidapk@gmail.com')
                 ->send(new OrderShipped($xml,$conditions,$h_name));
                 // $this->info('Email sent.');
 

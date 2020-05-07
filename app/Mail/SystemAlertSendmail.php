@@ -35,7 +35,7 @@ class SystemAlertSendmail extends Mailable
     public function build()
     {
         return $this
-        ->subject('ヤドキャンでエラーが発生しました')
+        ->subject('宿のマチコでエラーが発生しました')
         ->view('emails.alert')
         ->with([
             'title' => $this->title,

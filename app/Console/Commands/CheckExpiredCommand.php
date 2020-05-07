@@ -46,8 +46,8 @@ class CheckExpiredCommand extends Command
          logger("Cron action: Check Expired List");
  
          $results = DB::table('watchlists')
-         ->join('users', 'watchlists.user_id', '=', 'users.id')
-         ->select('watchlists.h_name','watchlists.id','watchlists.conditions','users.email')
+        //  ->join('users', 'watchlists.user_id', '=', 'users.id')
+         ->select('h_name','id','conditions','email')
          ->where([
              ['deleted_at', '=',null],
              ['expired', '=',null],])
@@ -67,7 +67,7 @@ class CheckExpiredCommand extends Command
                 ->update(['expired'=> 1]);
 
                 Mail::to($i->email)
-                ->send(new OrderShipped($xml=0,json_decode($i->conditions),$i->h_name));
+                ->send(new OrderShipped($xml=2,json_decode($i->conditions),$i->h_name));
             }
          } 
      }

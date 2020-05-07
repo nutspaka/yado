@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <h2 class="card-header">{{ __('メールアドレス認証完了') }}</h2>
+                <h2 class="card-header"><i class="far fa-check-circle"></i></h2>
+                <div>{{ __('メールアドレス認証完了') }}</div>
                 <br>
                 <div class="card-body">
-                    認証のお手続きをしていただき、誠にありがとうございました。
-                    <br>
-                    ホーム画面より、サービスをご利用くださいませ。
+                    お手続ありがとうございました。
+                    <br>ホーム画面より、サービスをご利用ください。
                 </div>
             </div>
         </div>

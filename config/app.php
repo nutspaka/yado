@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'YADOCAN'),
+    'name' => env('APP_NAME', 'yadonoyadonomachiko'),
 
     /*
     |--------------------------------------------------------------------------

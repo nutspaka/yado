@@ -23,31 +23,32 @@ class SearchController extends Controller
     //表示順（4:じゃらん口コミ順）
     CONST REVIEW_ORDER = 4;
     //宿泊施設の画像のサイズ
-    CONST PICT_SIZE = 4;
+    CONST PICT_SIZE = 5;
+    //宿泊施設の画像数
+    CONST PICTS = 5;
 
     public function index(){
         return view('index');
     }
 
-    // 検索結果を非同期で返す
     public function show(Request $request){
 
         //現在の入力をセッションへ、アプリに要求される次のユーザーリクエストの処理中だけ利用
-        //$request->flash();
-        
+        $request->flash();
         //URLパラメータ取得
-        if(isset($_GET)) { $search_input = $_GET; }
-
+        // if(isset($_GET)) { $param = $_GET; }
+        // logger($param);
+        // logger($request->all());
         //Guzzle（PHP HTTP client）
         $client = new \GuzzleHttp\Client();
 
         //日付加工
-        $search_input["stay_date"] = str_replace('-', '', $search_input["stay_date"]);
-        $year = substr($search_input["stay_date"],0,4);
-        $month = substr($search_input["stay_date"],4,2);
-        $date = substr($search_input["stay_date"],6,2);
+        // $request->stay_date = str_replace('-', '', $request->stay_date);
+        $year = substr($request->stay_date,0,4);
+        $month = substr($request->stay_date,4,2);
+        $date = substr($request->stay_date,6,2);
 
-        //エリア内の在庫ありホテル一覧抽出（staydateあり）
+        //エリア内の「在庫あり」ホテル一覧抽出（staydateあり）
         try {
             $response = $client->request(
                 'GET',
@@ -55,7 +56,7 @@ class SearchController extends Controller
                 ['http_errors' => false,
                  'query' =>
                   array_merge(
-                    $search_input
+                    $request->all()
                     ,array(
                         'key' => config('app.jalan_api_key')
                         ,'order'=>self::REVIEW_ORDER
@@ -68,7 +69,7 @@ class SearchController extends Controller
             $responseBody = $response->getBody()->getContents();
             $hotel_stock_list = @simplexml_load_string($responseBody);
             $hotel_stock_list = json_decode(json_encode($hotel_stock_list), true);
-            //logger($hotel_stock_list);
+            logger($hotel_stock_list);
             //結果が１件のときのみ、Hotelを配列にする処理
             if(!empty($hotel_stock_list["NumberOfResults"])){
                 if ($hotel_stock_list["NumberOfResults"]<2) {
@@ -78,19 +79,21 @@ class SearchController extends Controller
             //200以外の場合例外処理
             if($response->getStatusCode() != 200){
                 Mail::to('shogouchidapk@gmail.com')
-                ->send(new SystemAlertSendmail($response->getStatusCode(),$response->getBody(),$search_input));    
+                ->send(new SystemAlertSendmail($response->getStatusCode(),$response->getBody(),$request));    
                 throw new \Exception("システムエラー", $response->getStatusCode());
             } 
         } catch (\Exception $e) {
             //throw $th;
             logger('在庫検索HTTPステータスコード：エラー'.$e->getCode());
             $hotel_list["NumberOfResults"] = 0;
-            return $hotel_list;
+            return view('result')->with([
+                'hotel_list' => $hotel_list,
+                'err_code' => $e->getCode()
+                ]);
         }
         
         //stay_date削除
-        unset($search_input["stay_date"]);
-
+        // unset($request->stay_date);
         //エリア内の全ホテル一覧抽出（staydateなし）
         try {
             $response = $client->request(
@@ -99,13 +102,14 @@ class SearchController extends Controller
                 ['http_errors' => false,
                  'query' =>
                   array_merge(
-                    $search_input
+                    $request->except('stay_date')
                     ,array(
                         'key' => config('app.jalan_api_key')
                         ,'order'=>self::REVIEW_ORDER
                         ,'xml_ptn' =>self::RANGE_DISPLAY_REVIEW
                         ,'count' => self::HOTEL_DISPLAY
                         ,'pict_size' => self::PICT_SIZE
+                        // ,'picts' => self::PICTS
                     )
                   )
                 ]
@@ -114,6 +118,7 @@ class SearchController extends Controller
         $responseBody = $response->getBody()->getContents();
         $hotel_list = @simplexml_load_string($responseBody);
         $hotel_list = json_decode(json_encode($hotel_list), true);
+        logger($hotel_list);
         //$search_json = mb_convert_encoding($search_json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
         //文字化け対策
 
@@ -127,20 +132,35 @@ class SearchController extends Controller
         if(!empty($hotel_list["Hotel"])){
             //URL書き替え(APIキー剥き出しのため)
             for($j = 0; $j < count($hotel_list["Hotel"]); ++$j){  
-                $hotel_list["Hotel"][$j]["HotelDetailURL"] 
-                = config('app.jalan_url')
+                $url = config('app.jalan_url')
                   ."yad".$hotel_list["Hotel"][$j]["HotelID"]
                   ."/plan/?screenId=USW3001&"//プランページ
-                  ."stayCount=".$search_input["stay_count"]//宿泊日数
+                  ."stayCount=".$request->stay_count//宿泊日数
                   ."&stayYear=".$year//年
                   ."&stayMonth=".$month//月
                   ."&stayDay=".$date//日
-                  ."&adultNum=".$search_input["adult_num"]//大人
-                  ."&child1Num=".$search_input["sc_num"]//小学生
+                  ."&adultNum=".$request->adult_num//大人
                   ."&roomCount=1"//部屋
-                  ."&minPrice=0".$search_input["min_rate"]//最低金額
-                  ."&maxPrice=999999".$search_input["max_rate"]//最高金額
-                  ;
+                  ."&minPrice=".$request->min_rate//最低金額
+                  ."&maxPrice=".$request->max_rate//最高金額
+                ;
+                if ($request->sc_num > 0) {
+                    $url.="&child1Num=".$request->sc_num;//小学生(1-5まで、0だとエラー)
+                }
+                if ($request->has('2_meals')) {
+                    $url.="&2_meals=1";//夕朝食付き
+                }
+                if ($request->has('onsen')) {
+                    $url.="&onsen=1";
+                }
+                if ($request->has('o_bath')){
+                    $url.="&o_bath=1";
+                }
+                if ($request->has('jpn_room')) {
+                    $url.="&jpn_room=1";
+                }
+
+                $hotel_list["Hotel"][$j]["HotelDetailURL"] = $url;
 
                 if(!empty($hotel_stock_list["Hotel"])){
                 //在庫ありの宿があればフラグ立てる 
@@ -156,16 +176,21 @@ class SearchController extends Controller
             //200以外の場合例外処理
             if($response->getStatusCode() != 200){
                 Mail::to('shogouchidapk@gmail.com')
-                ->send(new SystemAlertSendmail($response->getStatusCode(),$response->getBody(),$search_input));  
+                ->send(new SystemAlertSendmail($response->getStatusCode(),$response->getBody(),$request));  
                 throw new \Exception("システムエラー", $response->getStatusCode());
             } 
-    } catch (\Throwable $th) {
+    } catch (\Exception $e) {
             //throw $th;
             logger('一覧検索HTTPステータスコード：エラー'.$e->getCode());
             $hotel_list["NumberOfResults"] = 0;
-            return $hotel_list;
+            return view('result')->with([
+                'hotel_list' => $hotel_list,
+                'err_code' => $e->getCode()
+                ]);
     }
-     return $hotel_list;
+    //  logger($hotel_list);
+     //検索結果
+     return view('result')->with('hotel_list',$hotel_list);
     } 
 
     //結果が１件のときのみ、後続処理のためHotelを配列にするメソッド
@@ -178,5 +203,17 @@ class SearchController extends Controller
         unset($ary["Hotel2"]);
         logger("１件のときのみ構造変化");
         return $ary;
+    }
+
+    //利用規約
+    public function showTerms()
+    {
+        return view('terms');
+    }
+
+    //プライバシーポリシー
+    public function showPolicy()
+    {
+        return view('policy');
     }
 }

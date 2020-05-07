@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
-<style>
-  body {
-    background-color: white;
-  }
-  h2 {
-    color: #736EFE;
-    background-color: #5EFCE8;
-    width: 100%;
-    text-align: center;
-  }
-</style>
 <body>
-  <h2>宿のキャンセル待ちサービス　ヤドキャン</h2>
-  <p>下記監視対象は、空室が発見されないまま宿泊日を超過いたしましたので、監視終了とさせていただきます。
+  <p>下記キャンセル待ち対象は、空室が発見されないまま宿泊日を超過いたしましたので、キャンセル待ち終了とさせていただきます。
   <hr>
-□　監視対象　□
+□　対象　□
 <br>
-<p>{!!$h_name!!}<p>
+<h4>{!!$h_name!!}</h4>
+□　条件　□
 <ul>
   <li>チェックイン　：{{date("Y/n/j", strtotime($conditions->stay_date))}}</li>
   <li>宿泊日数　　　：{{$conditions->stay_count}}泊</li>
-  <li>予約人数　　　：大人{{$conditions->adult_num}}人
+  <li>予約人数　　　：大人{{$conditions->adult_num}}名
      @if (!empty($conditions->sc_num))
-     、小学生{{$conditions->sc_num}}人                         
+     、小学生{{$conditions->sc_num}}名         
      @endif
   </li>
   <li>予算　　　　　：
@@ -35,6 +24,9 @@
     @endif
 　</li> 
   <li>その他　　　　：
+    @if (!empty($conditions->{'2_meals'}))
+    夕朝食付&nbsp;&nbsp;
+    @endif
     @if (!empty($conditions->onsen))
     温泉&nbsp;&nbsp;
     @endif
@@ -47,6 +39,12 @@
   </li>
 </ul>
   <hr>
-  宿のキャンセル待ちサービス　ヤドキャン
+<br>
+<br>
+  宿のキャンセル待ちサービス　宿のマチコ
+<br>
+  <a href="{{route('home')}}">{{route('home')}}</a>
+<br>
+<small>※当メールに心あたりが無い場合は、誠におそれいりますが、破棄していただけますようお願いいたします。</small>
 </body>
 </html>

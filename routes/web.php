@@ -17,25 +17,27 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/','SearchController@index')->name('home');
+Route::get('terms','SearchController@showTerms')->name('terms');
+Route::get('policy','SearchController@showPolicy')->name('policy');
 
 //ルートに対してレート制限（APIコール制限対策）
 Route::middleware('throttle:60,1')->group(function () {
-  Route::get('search','SearchController@show');
+  Route::get('search','SearchController@show')->name('search');
 });
 Route::get('check','SearchController@check');
-
+Route::post('store/watch','WatchController@store')->name('watching');
 
 Route::group(['middleware' => ['verified']], function () {
   //ログイン必要
-  Route::get('mypage', 'RegisterController@showMyPage')->name('mypage');
-  Route::post('store/watch','RegisterController@store');
-  Route::delete('delete/{id}', 'RegisterController@destroy')->where('id', '[0-9]+');
+  Route::get('mypage', 'WatchController@showMyPage')->name('mypage');
+  Route::delete('delete/{id}', 'WatchController@destroy')->where('id', '[0-9]+');
 });
 
 // Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm');
 // Route::post('auth/register', 'Auth\RegisterController@register');
 
-Auth::routes(['verify' => true]);
+//ユーザー認証
+Auth::routes(['verify' => false]);
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
