@@ -33,6 +33,8 @@ $(function(){
     $('#picky_detail').slideToggle(250);
   }
 
+  $('#my-spinner').addClass("loaded");
+
   // 画面下位置からフェード(px)
   var effect_pos = 80; 
 

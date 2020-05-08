@@ -94,11 +94,6 @@
                 </div>
                 <br>
         </main>
-        <div id="my-spinner" class="box loaded">
-            　<div class="spinner type1">
-                <span>通信中..</span>
-            　</div>
-        </div>
         @include('layouts.parts.footer') 
     </form>
     <div > 

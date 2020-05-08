@@ -43,7 +43,7 @@ class CheckExpiredCommand extends Command
     {
         //期限切れのチェック
          $this->info('Check Expired !!');
-         logger("Cron action: Check Expired List");
+         //logger("Cron action: Check Expired List");
  
          $results = DB::table('watchlists')
         //  ->join('users', 'watchlists.user_id', '=', 'users.id')

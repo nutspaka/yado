@@ -73,7 +73,9 @@ $(document).ready(function(){
   //都道府県（動的表示）
   $('select[name="pref"]').change(function() {
     let prefcd = $('select[name="pref"]').val();
+    $('#my-spinner').removeClass("loaded");
     prefChange(prefcd);
+    $('#my-spinner').addClass("loaded");
     //オプション解除
     $('select[name="l_area"] option').attr("selected", false);
   })
@@ -81,7 +83,9 @@ $(document).ready(function(){
   //広域エリア（動的表示）
   $('select[name="l_area"]').change(function() {
     let areacd  = $('select[name="l_area"]').val();
+    $('#my-spinner').removeClass("loaded");
     lareaChange(areacd);
+    $('#my-spinner').addClass("loaded");
     //オプション解除
     $('select[name="s_area"] option').attr("selected", false);
   })

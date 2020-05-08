@@ -69,7 +69,7 @@ class SearchController extends Controller
             $responseBody = $response->getBody()->getContents();
             $hotel_stock_list = @simplexml_load_string($responseBody);
             $hotel_stock_list = json_decode(json_encode($hotel_stock_list), true);
-            logger($hotel_stock_list);
+            // logger($hotel_stock_list);
             //結果が１件のときのみ、Hotelを配列にする処理
             if(!empty($hotel_stock_list["NumberOfResults"])){
                 if ($hotel_stock_list["NumberOfResults"]<2) {
@@ -118,7 +118,7 @@ class SearchController extends Controller
         $responseBody = $response->getBody()->getContents();
         $hotel_list = @simplexml_load_string($responseBody);
         $hotel_list = json_decode(json_encode($hotel_list), true);
-        logger($hotel_list);
+        // logger($hotel_list);
         //$search_json = mb_convert_encoding($search_json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
         //文字化け対策
 

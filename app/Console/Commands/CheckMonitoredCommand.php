@@ -44,7 +44,7 @@ class CheckMonitoredCommand extends Command
     {
         //
         $this->info('Check Monitored List !!');
-        logger("Cron action: Check Monitored List");
+        //logger("Cron action: Check Monitored List");
 
         $results = DB::table('watchlists')
         // ->join('users', 'watchlists.user_id', '=', 'users.id')

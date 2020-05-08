@@ -56,3 +56,8 @@
   <input id="l_area_inputed" value={{old('l_area')}}>
   <input id="s_area_inputed" value={{old('s_area')}}>
 </div>
+<div id="my-spinner" class="box">
+  　<div class="spinner type1">
+      <span>通信中..</span>
+  　</div>
+</div>

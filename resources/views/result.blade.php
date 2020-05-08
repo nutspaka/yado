@@ -51,11 +51,6 @@
             </div>    
         </div>
     </form>
-        <div id="my-spinner" class="box loaded">
-            　<div class="spinner type1">
-                <span>通信中..</span>
-            　</div>
-        </div>
         <main class="result_script">
         検索結果:<h1 class="color-grd">{{$hotel_list["NumberOfResults"]}}</h1>軒<small>※じゃらん人気順</small>
         <br>
@@ -103,7 +98,11 @@
                    </div>
                   @endif
                 </div><!-- info -->
-              <img src="{{$hotel["PictureURL"]}}" class="bg scale lazyloaded" data-scale="best-fill" alt={{$hotel["PictureCaption"]}} data-src={{$hotel["PictureURL"]}}>
+              @if(isset($hotel["PictureURL"]))
+              　<img src="{{$hotel["PictureURL"]}}" class="bg scale lazyloaded" data-scale="best-fill" alt="外観" data-src={{$hotel["PictureURL"]}}>
+              @else
+                <img src="" class="bg scale lazyloaded" data-scale="best-fill" alt>
+              @endif
             </div>
         </div>
         @endforeach
