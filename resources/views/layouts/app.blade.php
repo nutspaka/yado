@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-    <meta name="google-site-verification" content="0j6Bd19LIzIti7FXc9014gkZ3NmGAqFZ88CnsEcaFKc" />
     <title>{{ config('app.name', '宿のマチコ') }} | お問い合わせ・利用規約・プライバシーポリシー</title>
     <!-- SEO -->
+    <meta name="google-site-verification" content="zZJeigZ3oMBLJZqCp6K0uchELbQkerXUc17sPqJyzAg" />
     <meta name="description" content="お問い合わせ・利用規約・プライバシーポリシー|宿のキャンセル待ちサービスの「宿のマチコ」-じゃらんnet掲載のホテル・旅館に対応-">
     <meta name="keywords" content="旅行,じゃらん,満室">
     <link rel="canonical" href="{{route('home')}}">
