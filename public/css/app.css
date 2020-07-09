@@ -1,5 +1,5 @@
 html, body {
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Noto Serif JP', serif;
   letter-spacing: .1em;
   text-align: justify;
   margin: 0;
@@ -42,11 +42,10 @@ html, body {
 }
 
 h1{
-  font-weight: lighter;
-  display: inline-block;
   font-size: 36px;
   margin:20px auto 0px;
   color: #fff;
+  text-shadow: 1px 1px 1px rgb(71, 71, 71);
 }
 
 .about{
@@ -116,10 +115,6 @@ h2{
   margin-bottom: 10px;
 }
 
-label{
-  display:block;
-}
-
 .jalanlogo{
   padding-top: 10px;
 }
@@ -165,6 +160,10 @@ hr{
 #menu_input{
   padding: 20px 5px 10px 5px;
   font-size: 20px;
+}
+
+#menu_input label{
+  text-shadow: 1px 1px 1px rgb(71, 71, 71);
 }
 
 #picky_btn{
@@ -264,6 +263,7 @@ input{
   border: none;
   background-color: rgb(248, 248, 248);
   cursor: pointer;
+  /* -webkit-appearance: none; */
 }
 
 .btn {
@@ -279,7 +279,7 @@ input{
 
 .search{
   background-color:#ffbe44;
-  color: #fff;
+  color: black;
   border: solid 1px #fff;
   width: fit-content;
   margin: 10px auto;
@@ -405,7 +405,7 @@ input{
 
 .register_form{
   position: fixed;
-  top: 20%;
+  top: 10vh;
   left: 10%;
   right: 10%;
   border-radius: 10px;
@@ -649,7 +649,7 @@ input{
 }
 
 .result_script{
-  width: 50vw;
+  min-width: 50vw;
   min-height: 50vh;
   margin: auto;
 }
@@ -675,9 +675,13 @@ input{
 }
 
 .wait{
+  right: 10px;
   background-color: rgba(255, 60, 0, 0.856);
   padding: 1px;
   cursor : pointer;
+  position: absolute;
+  bottom: 0px;
+  width: 100px;
 }
 
 .wait:hover{
@@ -686,13 +690,17 @@ input{
 }
 
 .book{
+  right: 10px;
   background-color: #ffbe44d5;
   padding: 1px;
+  position: absolute;
+  bottom: 0px;
+  width: 100px;
 }
 
 .book:hover{
   background-color: rgba(255, 255, 255, 0.897);
-  color:#ffbe44;
+  color:rgb(255, 60, 0);;
 }
 
 
@@ -715,23 +723,37 @@ input{
 /*=============================================================================
   検索結果
 =============================================================================*/
-div.searchBoxNew{
-  width: 100%;
-  margin:15px auto;
+.center{
+  text-align: center;
+}
+
+#flex_list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.searchBoxNew{
+  width: 420px;
+  height: 280px;
+  margin:15px;
+  padding: 10px;
   position: relative;
   overflow: hidden;
   color: #fff;
-  border-bottom: 1px solid #333;
   border-radius: 10px;
 }
 
-div.searchBoxNew::after{
+.searchBoxNew::after{
   content: "";
   display: block;
   padding-top: 52%;
+  margin: 10px;
 }
 
-div.searchBoxNew div.content{
+.searchBoxNew div.content{
   position: absolute;
   top: 0;
   left: 0;
@@ -739,27 +761,38 @@ div.searchBoxNew div.content{
   right: 0;
 }
 
-div.searchBoxNew img.bg{
+.searchBoxNew img.bg{
   vertical-align: bottom;
   width: 100%;
 }
 
-div.searchBoxNew div.info{
-  background: linear-gradient(to bottom, transparent 0, rgba(0,0,0,.65) 100%);
+.searchBoxNew img.full{
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.searchBoxNew div.info{
+  background: linear-gradient(to bottom, transparent 0, rgba(0,0,0,.85) 100%);
   padding: 60px 3% 0px;
   bottom: 0;
   width: 100%;
   position: absolute;
   color: #fff;
+  z-index: 999;
 }
 
-div.searchBoxNew h2{
+.searchBoxNew h2{
   font-size: 16px;
   text-shadow: 1px 1px 0 #000, 1px 1px 0 #000;
   letter-spacing: 1px;
 }
 
-div.searchBoxNew div.lr{
+.searchBoxNew div.lr{
   display: table;
   width: 100%;
 }
@@ -775,7 +808,7 @@ div.searchBoxNew div.right{
   text-align: right;
 } */
 
-div.searchBoxNew span.countRoom{
+.searchBoxNew span.countRoom{
   padding: 4px 5px 2px;
   font-size: 11px;
   line-height: 1;
@@ -790,7 +823,7 @@ div.searchBoxNew span.countRoom{
   vertical-align: middle;
 }
 
-div.searchBoxNew div.left p.area{
+.searchBoxNew div.left p.area{
   font-size: 10px;
   margin: 5px 0 3px;
   letter-spacing: 1px;
@@ -798,7 +831,7 @@ div.searchBoxNew div.left p.area{
   background-size: auto 10px;
 }
 
-div.searchBoxNew div.left p.area img{
+.searchBoxNew div.left p.area img{
   width: 8px;
   margin-right: 5px;
   vertical-align: top;
@@ -809,12 +842,15 @@ img.offer-icon{
   vertical-align: bottom;
 }
 
-div.searchBoxNew img.offer-icon{
+.searchBoxNew img.offer-icon{
   position: absolute;
   top: 8px;
   right: 8px;
 }
 
-div.offer-reserve{
-  margin-bottom: 10px;
+#h_name_modal{
+  color:white;
+  background-color: rgb(43, 42, 42);
+  width: 100%;
+  padding: 20px;
 }

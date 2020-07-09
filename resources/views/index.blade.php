@@ -18,7 +18,7 @@
         <meta property="article:tag" content="ホテル">
         <meta property="article:tag" content="じゃらん">
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/1343700754.js" crossorigin="anonymous"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}?<?php echo date('Ymd-Hi'); ?>" rel="stylesheet">
@@ -45,7 +45,7 @@
 <form id="conditions" method="get" action="{{route('search')}}">
         <div id="menu" class="gradient">
             <div id="head-line">
-              <h1>１分簡単登録で<br>宿をキャンセル待ち</h1>
+              <h1>１分でかんたん<br>宿をキャンセル待ち</h1>
               {{-- 検索ボックス --}}
               @include('layouts.parts.search') 
             </div>    

@@ -18,7 +18,7 @@
         <meta property="article:tag" content="ホテル">
         <meta property="article:tag" content="じゃらん">
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/1343700754.js" crossorigin="anonymous"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}?<?php echo date('Ymd-Hi'); ?>" rel="stylesheet">
@@ -52,15 +52,16 @@
         </div>
     </form>
         <main class="result_script">
-        検索結果:<h1 class="color-grd">{{$hotel_list["NumberOfResults"]}}</h1>軒<small>※じゃらん人気順</small>
-        <br>
+        <h3 class="center">{{$hotel_list["NumberOfResults"]}}軒みつかりました</h3>
         @if ($hotel_list["NumberOfResults"] > 100)
         <p>※100件を超えた検索結果は表示できません。宿泊条件の絞り込みをお願いします。</p>
         @endif
         @if ($hotel_list["NumberOfResults"] > 0)
+
         {{-- ホテル一覧 --}}
+        <ul id="flex_list">
         @foreach ($hotel_list["Hotel"] as $hotel)
-        <div class="searchBoxNew scroll-fade">
+        <li class="searchBoxNew scroll-fade">
             <div class="content">
                 @if (isset($hotel["PlanFlag"]))
                 <div class="availability">
@@ -79,33 +80,42 @@
                      <span class='rate rate{{floor($hotel["Rating"])}}-{{round(doubleval($hotel["Rating"])-floor($hotel["Rating"]))}}'></span>&nbsp;
                      <strong class="rate_num">
                         {{doubleval($hotel["Rating"])}}                           
-                     </strong>                        
+                     </strong>
+                     <span>&nbsp;<i class="far fa-comment-dots"></i>{{$hotel["NumberOfRatings"]}}&nbsp;</span>                        
                     @else
                     <small>ー (有効口コミ数未達) </small>
                     @endif
-                     <span>&nbsp;<i class="far fa-comment-dots"></i>{{$hotel["NumberOfRatings"]}}&nbsp;</span><span>&nbsp;¥{{$hotel["SampleRateFrom"]}}〜</span>
+                    <br>
+                     <p>&nbsp;¥{{$hotel["SampleRateFrom"]}}〜</p>
                     </div>
                   </div>
                   @if (isset($hotel["PlanFlag"]))
                     <a target="_blank" href={{$hotel["HotelDetailURL"]}}>
-                        <div class="btn book"><i class="far fa-window-restore"></i>&nbsp;じゃらんnetで予約する&nbsp;></div>
+                        <div class="btn book">&nbsp;予約&nbsp;<i class="far fa-window-restore"></i>
+                          <br><small>※じゃらんnetへ遷移</small></div>
                     </a>
                   @else
                    <div class="btn wait">
                     <input style="display: none" class="target_h_name" value={{$hotel["HotelName"]}}>
                     <input style="display: none" class="target_h_id" value={{$hotel["HotelID"]}}>
-                      <span><i class="far fa-clock"></i>&nbsp;キャンセル待ちをする&nbsp;></span>
+                      <span>&nbsp;空室通知登録&nbsp;></span>
                    </div>
                   @endif
                 </div><!-- info -->
               @if(isset($hotel["PictureURL"]))
-              　<img src="{{$hotel["PictureURL"]}}" class="bg scale lazyloaded" data-scale="best-fill" alt="外観" data-src={{$hotel["PictureURL"]}}>
+              　 @if (isset($hotel["PlanFlag"]))
+                   <img src="{{$hotel["PictureURL"]}}" class="bg scale lazyloaded" data-scale="best-fill" alt="外観" data-src={{$hotel["PictureURL"]}}>
+                @else
+                   <img src="{{$hotel["PictureURL"]}}" class="full scale lazyloaded" data-scale="best-fill" alt="外観" data-src={{$hotel["PictureURL"]}}>
+                @endif
               @else
                 <img src="" class="bg scale lazyloaded" data-scale="best-fill" alt>
               @endif
             </div>
-        </div>
+          </li>
         @endforeach
+        </ul>
+        <p class="center">※じゃらん人気順に掲載</p>
         @elseif(isset($err_code))
         <br>
         <h3 class="alert">Sorry..</h3>
@@ -126,7 +136,6 @@
             <a class="btn search" href="javascript:void(0)">検索条件を指定する</a>
         </div> 
         <br>
-
         </main>
         @include('layouts.parts.footer') 
     {{-- 登録モーダル --}}
@@ -135,8 +144,7 @@
         </div>
         <div class="register_form">
           <span id="close">×</span>
-          <br>
-          <h2 id="h_name_modal" class="color-grd"></h2>
+          <h2 id="h_name_modal"></h2>
           {{-- 登録前 --}}
           <form id="watch_register" name="watching" method="post" action="">
             <h3>空室通知先を入力してください</h3>

@@ -23,18 +23,21 @@
                 </label> --}}
       </div>
       <div>
-        大人<input type="number" name="adult_num" min=1 max=10 value={{ old('adult_num',2) }}>名&nbsp;
-        小学生<input type="number" name="sc_num" min=0 max=5 placeholder="0" value={{ old('sc_num',null) }}>名&nbsp;
-        <span id="picky_btn" class='btn-slide-toggle'>こだわり<i class="fas fa-angle-down"></i>
+        <label>大人</label><input type="number" name="adult_num" min=1 max=10 value={{ old('adult_num',2) }}>
+        <label>小学生</label><input type="number" name="sc_num" min=0 max=5 placeholder="0" value={{ old('sc_num',null) }}>
+        <span id="picky_btn" class='btn-slide-toggle'><label>こだわり<i class="fas fa-angle-down"></i></label>
         </span>   
       </div>       
       <div id="picky_detail" style="display: none">
-          予算<input class="budget" type="number" name="min_rate" min="0" step="1000" placeholder="下限なし" autocomplete="off" value={{ old('min_rate') }}>~<input class="budget" type="number" name="max_rate" min="0" step="1000" placeholder="上限なし" autocomplete="off" value={{ old('max_rate')}}>円<small>※1部屋1泊あたり</small>
+          <label>１泊の予算</label>
+          <input class="budget" type="number" name="min_rate" min="0" step="1000" placeholder="下限なし" autocomplete="off" value={{ old('min_rate') }}>〜
+          <input class="budget" type="number" name="max_rate" min="0" step="1000" placeholder="上限なし" autocomplete="off" value={{ old('max_rate')}}>
+          <br>
           <label>
-            <input type="checkbox" name="2_meals" value="1">夕朝食付&nbsp;
-            <input type="checkbox" name="onsen" value="1">温泉&nbsp;
-            <input type="checkbox" name="o_bath" value="1">露天風呂&nbsp;
-            <input type="checkbox" name="jpn_room" value="1">和室
+            <input type="checkbox" id="2_meals" name="2_meals" value="1"><label for="2_meals">夕朝食付</label>
+            <input type="checkbox" id="onsen" name="onsen" value="1"><label for="onsen">温泉</label>
+            <input type="checkbox" id="o_bath" name="o_bath" value="1"><label for="o_bath">露天風呂</label>
+            <input type="checkbox" id="jpn_room" name="jpn_room" value="1"><label for="jpn_room">和室</label>
           </label>
       </div>
       <a href="javascript:void(0)" id="search" class="search btn">宿を検索 <i class="fas fa-search"></i></a>
