@@ -1,4 +1,4 @@
-<div id="menu_input" role="search">
+<div id="menu_input">
                 <!-- <div id="name_lookup">
                     <input name="h_name" type="text" placeholder="宿名・キーワードから探す">
                 </div> -->

@@ -27,7 +27,7 @@ footer{
   </style>
 </head>
 
-<footer role="contentinfo">
+<footer>
   <div id="snslogo">
     <div id="fb-root"></div>
     <div id="fb-root"></div>

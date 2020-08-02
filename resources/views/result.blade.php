@@ -6,7 +6,7 @@
         <title>検索結果｜{{Config::get('app.name')}}</title>
         <!-- SEO -->
         <meta name="google-site-verification" content="zZJeigZ3oMBLJZqCp6K0uchELbQkerXUc17sPqJyzAg" />
-        <meta name="description" content="1分かんたんに宿をキャンセル待ち！ホテル・旅館のキャンセル待ちサービスなら「宿のマチコ」-じゃらんnet掲載の宿に対応-">
+        <meta name="description" content="1分簡単手続きで宿をキャンセル待ち！ホテル・旅館のキャンセル待ちサービスなら「宿のマチコ」-じゃらんnet掲載の宿に対応-">
         <meta name="keywords" content="旅行,じゃらん,満室">
         <link rel="canonical" href="{{route('home')}}">
         <meta property="og:locale" content="ja_JP">
@@ -45,10 +45,10 @@
     </div>
     <form id="conditions" method="get" action="{{route('search')}}">
         <div id="menu" class="gradient">
-            <section id="head-line">
+            <div id="head-line">
               {{-- 検索ボックス --}}
               @include('layouts.parts.search') 
-            </section>    
+            </div>    
         </div>
     </form>
         <main class="result_script">
@@ -73,7 +73,7 @@
                 </div>
                 @endif
                 <div class="info">
-                  <h3>{{$hotel["HotelName"]}}</h3>
+                  <h2>{{$hotel["HotelName"]}}</h2>
                   <div class="lr">
                     <div>
                     @if (doubleval($hotel["Rating"])!=0)
