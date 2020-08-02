@@ -6,7 +6,7 @@
         <title>{{Config::get('app.name')}}｜TOPページ</title>
         <!-- SEO -->
         <meta name="google-site-verification" content="zZJeigZ3oMBLJZqCp6K0uchELbQkerXUc17sPqJyzAg" />
-        <meta name="description" content="1分簡単手続きで宿をキャンセル待ち！ホテル・旅館のキャンセル待ちサービスなら「宿のマチコ」-じゃらんnet掲載の宿に対応-">
+        <meta name="description" content="1分簡単手続きで宿をキャンセル待ち！ホテル・旅館のキャンセル待ちサービスなら「宿のマチコ」-じゃらんnetの宿に対応-">
         <meta name="keywords" content="旅行,じゃらん,満室">
         <link rel="canonical" href="https://www.yadonomachiko.work">
         <meta property="og:locale" content="ja_JP">
