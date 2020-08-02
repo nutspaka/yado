@@ -35,8 +35,8 @@
             <div class="noScript">サイトを利用するためには、JavaScriptを有効にしてください。</div>
          </noscript>
     </head>
-    <body>
-    <div class="nav-bar">
+    <body role="application">
+    <div class="nav-bar" role="navigation">
         <a href="/">
             <img class="logo" src="/images/logo.png" alt="logo">
           </a>

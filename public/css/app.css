@@ -682,6 +682,7 @@ input{
   position: absolute;
   bottom: 0px;
   width: 100px;
+  height: 80px;
 }
 
 .wait:hover{
@@ -696,6 +697,7 @@ input{
   position: absolute;
   bottom: 0px;
   width: 100px;
+  height: 80px;
 }
 
 .book:hover{
