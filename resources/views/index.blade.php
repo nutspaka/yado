@@ -59,7 +59,7 @@
                 <div class="meritBox scroll-fade">
                     <div class="meritImg"><a href="https://www.jalan.net/jw/jwp0000/jww0001.do" target="_blank"><img class="jalanlogo" src="https://www.jalan.net/jalan/doc/jws/images/jws_88_50_gray.gif" alt="じゃらん Web サービス" title="じゃらん Web サービス" border="0"></a></div>
                     <h3 class="title">安心のシステム</h3>
-                    <p class="description">日本最大級の旅行予約サイト「じゃらんnet」のシステムと連携。最新の空室情報を取得し、ホテル・旅館のキャンセル待ちをシステムが行います。</p>
+                    <p class="description">日本最大級の旅行予約サイト「じゃらんnet」システムと連携。最新の空室情報を取得し、ホテル・旅館のキャンセル待ちをシステムが行います。</p>
                 </div>
                 <div class="meritBox scroll-fade">
                     <div class="meritImg">￥<span class="freePrice color-grd">0</span></div>
